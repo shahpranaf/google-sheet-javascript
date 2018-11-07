@@ -16,8 +16,8 @@ GoogleUrl = (function() {
     //   this.key = this.sourceIdentifier;
     // }
     this.key="1PMqmENs4Td14BCLkOdhWfeerN70hYE4P8bcZRklroW4";
-    this.jsonCellsUrl = "http://spreadsheets.google.com/feeds/cells/" + this.key + "/"+this.sheetId+"/public/basic?alt=json-in-script";
-    this.jsonListUrl = "http://spreadsheets.google.com/feeds/list/" + this.key + "/"+this.sheetId+"/public/basic?alt=json-in-script";
+    this.jsonCellsUrl = "https://spreadsheets.google.com/feeds/cells/" + this.key + "/"+this.sheetId+"/public/basic?alt=json-in-script";
+    this.jsonListUrl = "https://spreadsheets.google.com/feeds/list/" + this.key + "/"+this.sheetId+"/public/basic?alt=json-in-script";
     this.jsonUrl = this.jsonListUrl;
   }
   return GoogleUrl;
