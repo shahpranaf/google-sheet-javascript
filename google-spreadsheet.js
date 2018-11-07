@@ -4,7 +4,9 @@ Updated versions can be found at https://github.com/mikeymckay/google-spreadshee
 GoogleUrl = (function() {
   function GoogleUrl(sourceIdentifier) {
     this.sourceIdentifier = sourceIdentifier;
-    this.sheetId = 2;
+    let params = (new URL(document.location)).searchParams;
+    let sheetid = params.get("id");
+    this.sheetId = sheetid || 1;
     // if (this.sourceIdentifier.match(/http(s)*:/)) {
     //   this.url = this.sourceIdentifier;
     //   try {
