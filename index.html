@@ -47,6 +47,7 @@
       let params = (new URL(document.location)).searchParams;
       let rowNo = params.get("row") || 9;
       let margin = params.get("m") || 30;
+      let num = params.get("n") || false;
 
       var googleSpreadsheet = new GoogleSpreadsheet();
       googleSpreadsheet.url(url);
@@ -103,7 +104,9 @@
                 html = html + `<div class="row-${j} row">`;
               }
 
-              html = html + `<div class="card col-md-4 card-${index}">
+              let v = (num) ? index : "";
+
+              html = html + `<div class="card col-md-4 card-${index}">${v}
                 <div class="card-body">
                   <address>
                     <strong class="name">${name.replace(",", "").replace("family", "Family")}</strong><br>
