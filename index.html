@@ -22,9 +22,14 @@
       }
       .card {
         text-align: center;
+        min-width: 390px;
       }
       .card-body {
         padding: 0;
+        padding-top: 16px;
+      }
+      .name {
+        font-size: 
       }
     </style>
   </head> 
@@ -38,8 +43,12 @@
     <script id='script'>
       localStorage.clear();
       var sample_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTaDPTnIxBcmnM441VCL9p0SG_gG4yTr5mP4SHoF3K122Ni76HU5IC7Y1JTAbL6PiFN0n9yvYmWEuBS/pubhtml";
-      var url_parameter = document.location.search.split(/\?url=/)[1]
+      var url_parameter = document.location.search.split(/\?url=/)[1];
       var url = url_parameter || sample_url;
+      let params = (new URL(document.location)).searchParams;
+      let rowNo = params.get("row") || 9;
+      let margin = params.get("m") || 30;
+
       var googleSpreadsheet = new GoogleSpreadsheet();
       googleSpreadsheet.url(url);
       googleSpreadsheet.load(function(result) {
@@ -47,8 +56,10 @@
         result = result.data;
         let address = [];
         let html = "";
-
+        let i=0;
+        let j=1;
         result.forEach(function(element, index) {
+          index++;
           if(element != "") {
             result = element.split(', pp');
             let addrJson = {};
@@ -88,17 +99,27 @@
             addrJson.postaladdress = realAddr.join("\n");
             address.push(addrJson);
 
-
             if(name != ""){
-              html = html + `<div class="card col-md-4">${index+1}
+              if(i==0){
+                html = html + `<div class="row-${j} row">`;
+              }
+
+              html = html + `<div class="card col-md-4 card-${index}">
                 <div class="card-body">
                   <address>
-                    <strong class="name">${name}</strong><br>
+                    <strong class="name">${name.replace(",", "").replace("family", "Family")}</strong><br>
                     ${addrJson.postaladdress}<br>
                     <span title="Phone">&#9742; </span>${mob}
                   </address>
                 </div>
               </div>`
+              
+              i++;
+              if(index%3 == 0){
+                html = html + `</div>`;
+                i = 0;
+                j++;
+              }
             }
           }
         });
@@ -106,6 +127,8 @@
 
           
           $('#results').html(html);
+
+          $(".row-"+rowNo).css("margin-top", margin+"px")
       });
       
     </script>
