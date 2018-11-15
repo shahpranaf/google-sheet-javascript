@@ -130,7 +130,9 @@
           
           $('#results').html(html);
 
-          $(".row-"+rowNo).css("margin-top", margin+"px")
+          rowNo.split(",").forEach( (ele) => {
+            $(".row-"+ele).css("margin-top", margin+"px")
+          })
       });
       
     </script>
