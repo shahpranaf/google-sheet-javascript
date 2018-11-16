@@ -21,6 +21,7 @@
         font-family: sans-serif;
       }
       .card {
+        font-size: 18px;
         text-align: center;
       }
       .card-body {
@@ -28,7 +29,10 @@
         padding-top: 16px;
       }
       .name {
-        color: red;
+        color: red;        
+      }
+      .row {
+        width: 100%;
       }
     </style>
   </head> 
@@ -106,7 +110,7 @@
 
               let v = (num) ? index : "";
 
-              html = html + `<div class="card col-md-4 card-${index}">${v}
+              html = html + `<div class="card col-md-6 card-${index}">${v}
                 <div class="card-body">
                   <address>
                     <strong class="name">${name.replace(",", "").replace("family", "Family")}</strong><br>
@@ -117,7 +121,7 @@
               </div>`
               
               i++;
-              if(index%3 == 0){
+              if(index%2 == 0){
                 html = html + `</div>`;
                 i = 0;
                 j++;
@@ -130,8 +134,10 @@
           
           $('#results').html(html);
 
-          rowNo.split(",").forEach( (ele) => {
-            $(".row-"+ele).css("margin-top", margin+"px")
+          margin = margin.split(",")
+
+          rowNo.split(",").forEach( (ele,index) => {
+            $(".row-"+ele).css("margin-bottom", margin[index]+"px")
           })
       });
       
